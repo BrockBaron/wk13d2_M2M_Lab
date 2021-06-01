@@ -22,8 +22,8 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
-    public Department(Long id, String deptName, List<Employee> employees) {
-        this.id = id;
+    public Department(String deptName) {
+//        this.id = id;     !! not needed - gets returned by the database
         this.deptName = deptName;
         this.employees = new ArrayList<>();
     }
