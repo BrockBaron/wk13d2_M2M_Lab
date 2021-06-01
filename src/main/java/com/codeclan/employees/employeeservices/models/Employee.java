@@ -2,6 +2,7 @@ package com.codeclan.employees.employeeservices.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,9 +25,27 @@ public class Employee {
     @Column(name = "employeeNumber")
     private int employeeNumber;
 
+    @JsonIgnoreProperties({"department"})
+    @OneToMany(mappedBy = "department")
+    private List<Department> departments;
+
+    @ManyToMany
     @JsonIgnoreProperties({"project"})
-    @OneToMany(mappedBy = "project")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "employee_projects",
+            joinColumns = { @JoinColumn(
+                    name = "employee_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn(
+                    name = "project_id",
+                    nullable = false,
+                    updatable = false)
+            })
     private List<Project> projects;
+
 
     public Employee(Long id, String firstName, String lastName, int employeeNumber, List<Project> projects) {
         this.id = id;
@@ -36,9 +55,10 @@ public class Employee {
         this.projects = new ArrayList<>();
     }
 
+    public Employee() {
+    }
 
-
-//    G&S
+    //    G&S
     public Long getId() {
         return id;
     }

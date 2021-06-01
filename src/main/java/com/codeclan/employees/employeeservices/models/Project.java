@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,8 +37,48 @@ public class Project {
                     nullable = false,
                     updatable = false)
             })
-    private List<Employee> employee;
+    private List<Employee> employees;
 
+    public Project(Long id, String name, int duration, List<Employee> employee) {
+        this.id = id;
+        this.name = name;
+        this.duration = duration;
+        this.employees = new ArrayList<>();
+    }
 
+    public Project() {
+    }
 
+    //GETTERS & SETTERS
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public List<Employee> getEmployee() {
+        return employees;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employees = employee;
+    }
 }
