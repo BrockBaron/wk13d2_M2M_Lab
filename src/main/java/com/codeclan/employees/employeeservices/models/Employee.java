@@ -47,11 +47,12 @@ public class Employee {
     private List<Project> projects;
 
 
-    public Employee(Long id, String firstName, String lastName, int employeeNumber, List<Project> projects) {
+    public Employee(Long id, String firstName, String lastName, int employeeNumber, List<Department> departments, List<Project> projects) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeNumber = employeeNumber;
+        this.departments = new ArrayList<>();
         this.projects = new ArrayList<>();
     }
 
